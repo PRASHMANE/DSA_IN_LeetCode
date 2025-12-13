@@ -1,24 +1,24 @@
 class Solution(object):
     def validateCoupons(self, code, businessLine, isActive):
-        e, g, p, r = [], [], [], []
+        groups = {
+            "electronics": [],
+            "grocery": [],
+            "pharmacy": [],
+            "restaurant": []
+        }
 
-        for i in range(len(isActive)):
-            if not isActive[i]:
-                continue
+        for c, b, a in zip(code, businessLine, isActive):
+            if (
+                a
+                and b in groups
+                and c
+                and all(ch.isalnum() or ch == '_' for ch in c)
+            ):
+                groups[b].append(c)
 
-            bl = businessLine[i]
-            if bl not in ("electronics", "grocery", "pharmacy", "restaurant"):
-                continue
-
-            if not code[i]:
-                continue
-
-            if not all(ch.isalnum() or ch == '_' for ch in code[i]):
-                continue
-
-            if bl.startswith("e"): e.append(code[i])
-            if bl.startswith("g"): g.append(code[i])
-            if bl.startswith("p"): p.append(code[i])
-            if bl.startswith("r"): r.append(code[i])
-
-        return sorted(e) + sorted(g) + sorted(p) + sorted(r)
+        return (
+            sorted(groups["electronics"]) +
+            sorted(groups["grocery"]) +
+            sorted(groups["pharmacy"]) +
+            sorted(groups["restaurant"])
+        )
