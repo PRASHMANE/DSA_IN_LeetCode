@@ -1,21 +1,20 @@
 class Solution:
     def mergeArrays(self, nums1, nums2):
-        result = []
-        used = [False] * len(nums2)
+        i = j = 0
+        res = []
 
-        for id1, val1 in nums1:
-            found = False
-            for j, (id2, val2) in enumerate(nums2):
-                if id1 == id2:
-                    result.append([id1, val1 + val2])
-                    used[j] = True
-                    found = True
-                    break
-            if not found:
-                result.append([id1, val1])
+        while i < len(nums1) and j < len(nums2):
+            if nums1[i][0] == nums2[j][0]:
+                res.append([nums1[i][0], nums1[i][1] + nums2[j][1]])
+                i += 1
+                j += 1
+            elif nums1[i][0] < nums2[j][0]:
+                res.append(nums1[i])
+                i += 1
+            else:
+                res.append(nums2[j])
+                j += 1
 
-        for i in range(len(nums2)):
-            if not used[i]:
-                result.append(nums2[i])
-
-        return sorted(result)
+        res.extend(nums1[i:])
+        res.extend(nums2[j:])
+        return res
