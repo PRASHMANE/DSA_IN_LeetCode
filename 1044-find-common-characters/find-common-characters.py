@@ -1,15 +1,9 @@
 from collections import Counter
 class Solution:
     def commonChars(self, words: List[str]) -> List[str]:
-        ans=[]
-        for ch in words[0]:
-            found=True
-            for i in range(1,len(words)):
-                if ch in words[i]:
-                    words[i]=words[i].replace(ch,"",1)
-                else:
-                    found=False
-                    break
-            if found:
-                ans.append(ch)
-        return ans
+        common=Counter(words[0])
+
+        for i in words[1:]:
+            common &= Counter(i)
+        return list(common.elements())
+        
