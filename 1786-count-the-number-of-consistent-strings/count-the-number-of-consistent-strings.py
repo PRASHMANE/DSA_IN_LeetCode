@@ -6,4 +6,4 @@ class Solution:
                 if j not in allowed:
                     count+=1
                     break
-        return len(words) - count
+        return len(words)-count
