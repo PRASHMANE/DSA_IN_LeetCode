@@ -1,15 +1,13 @@
 class Solution:
     def totalMoney(self, n: int) -> int:
-        amount=0
-        weekstart=1
-        dayofweek=0
-
-        for _ in range(n):
-            amount+=weekstart+dayofweek
-            dayofweek+=1
-
-            if dayofweek == 7:
-                dayofweek=0
-                weekstart+=1
-        return amount
+        fullWeeks = n // 7
+        rem = n % 7
         
+        # total from full weeks
+        total_full = fullWeeks * 28 + 7 * (fullWeeks * (fullWeeks - 1) // 2)
+        
+        # total from remaining days
+        weekStart = fullWeeks + 1
+        total_rem = rem * weekStart + (rem * (rem - 1) // 2)
+        
+        return total_full + total_rem
