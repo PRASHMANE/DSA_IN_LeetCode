@@ -1,21 +1,25 @@
 class Solution:
     def maximizeSquareArea(self, m: int, n: int, hFences: List[int], vFences: List[int]) -> int:
-        hFences.extend([1, m])
-        vFences.extend([1, n])
 
-        stt = set()
-        ans = 0
+        h=self.get_edge(hFences,m)
+        v=self.get_edge(vFences,n)
 
-        for i in range(len(hFences)):
-            for j in range(i+1, len(hFences)):
-                stt.add(abs(hFences[j]-hFences[i]))
-        
-        for i in range(len(vFences)):
-            for j in range(i+1, len(vFences)):
-                val = abs(vFences[j]-vFences[i])
-                if val in stt:
-                    ans = max(ans, val)
-        
-        if ans == 0:
+        max_size=-1
+        for i in h:
+            if i in v:
+                max_size=max(max_size,i)
+
+        if max_size == -1:
             return -1
-        return (ans*ans)%(10**9+7)
+        return (max_size * max_size) % (10 ** 9 + 7)
+        
+    def get_edge(self,f,limit):
+        f=[1]+f+[limit]
+        f.sort()
+
+        s=set()
+        n = len(f)
+        for i in range(n):
+            for j in range(i+1,n):
+                s.add(f[j]-f[i])
+        return s
