@@ -3,14 +3,14 @@ class Solution:
         if numRows == 1:
             return s
 
-        rows = [""] * numRows
-        cur = 0
-        direction = -1
+        row=[""]*numRows
+        curr=0
+        direction=-1
 
         for ch in s:
-            rows[cur] += ch
-            if cur == 0 or cur == numRows - 1:
-                direction *= -1
-            cur += direction
+            row[curr] += ch
+            if curr == 0 or curr == numRows-1:
+                direction*=-1
+            curr+=direction
 
-        return "".join(rows)
+        return "".join(row)
