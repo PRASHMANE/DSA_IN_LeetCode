@@ -1,10 +1,11 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        count=0
-        val=0
-        lst=set(nums)
-        for i in lst:
-            if nums.count(i) > count:
-                count = nums.count(i)
-                val = i
-        return val
+        count=Counter(nums)
+        n = float("inf")
+        maxi=0
+        for i in count:
+            if count[i] > maxi :
+                n = i
+                maxi = count[i]
+        return n
+                
