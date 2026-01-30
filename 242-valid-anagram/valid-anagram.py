@@ -6,11 +6,13 @@ class Solution:
         counter = {}
 
         for char in s:
-            counter[char] = counter.get(char, 0) + 1
-
+            if char in counter:
+                counter[char]=counter.get(char,0)+1
+            else:
+                counter[char] = 1
+        
         for char in t:
             if char not in counter or counter[char] == 0:
                 return False
-            counter[char] -= 1
-
+            counter[char]-=1
         return True
