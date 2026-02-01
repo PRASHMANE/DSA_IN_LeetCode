@@ -1,12 +1,9 @@
 class Solution:
     def findLHS(self, nums):
-        nums.sort()
-        j = 0
-        maxLength = 0
+        fre=Counter(nums)
+        ans=0
 
-        for i in range(len(nums)):
-            while nums[i] - nums[j] > 1:
-                j += 1
-            if nums[i] - nums[j] == 1:
-                maxLength = max(maxLength, i - j + 1)
-        return maxLength
+        for num in fre:
+            if num+1 in fre:
+                ans=max(ans,fre[num]+fre[num+1])
+        return ans
