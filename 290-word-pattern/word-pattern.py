@@ -1,18 +1,4 @@
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
         words = s.split()
-        if len(pattern) != len(words):
-            return False
-
-        p_to_w = {}
-        w_to_p = {}
-
-        for p, w in zip(pattern, words):
-            if (p in p_to_w and p_to_w[p] != w) or \
-               (w in w_to_p and w_to_p[w] != p):
-                return False
-
-            p_to_w[p] = w
-            w_to_p[w] = p
-
-        return True
+        return [pattern.index(c) for c in pattern] == [words.index(c) for c in words]
