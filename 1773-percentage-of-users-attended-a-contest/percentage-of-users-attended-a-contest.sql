@@ -9,4 +9,4 @@ left join Register r
 on u.user_id = r.user_id
 WHERE r.contest_id is not null
 group by r.contest_id
-order by percentage DESC, r.contest_id ASC;
+order by percentage DESC, r.contest_id ASC ;
