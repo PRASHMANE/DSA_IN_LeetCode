@@ -10,22 +10,20 @@ class Solution:
         if not head or not head.next:
             return None
 
-        slow = fast = head
+        fast=slow=head
 
-        # Step 1: Detect cycle
         while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+
+            fast=fast.next.next
+            slow=slow.next
 
             if slow == fast:
                 break
         else:
-            return None  # No cycle
-
-        # Step 2: Find cycle start
+            return None
+        
         slow = head
         while slow != fast:
-            slow = slow.next
-            fast = fast.next
-
+            slow=slow.next
+            fast=fast.next
         return slow
