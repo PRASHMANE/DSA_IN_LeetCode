@@ -1,0 +1,6 @@
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        binary = format(n, '032b')   # 32-bit binary
+        reversed_binary = binary[::-1]
+        return int(reversed_binary, 2)
+        
