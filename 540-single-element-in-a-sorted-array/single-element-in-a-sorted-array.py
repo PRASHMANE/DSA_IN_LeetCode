@@ -17,21 +17,20 @@ class Solution:
         while low <= high:
             mid = (low+high)//2
 
-            
+            if nums[mid] != nums[mid-1] and nums[mid] != nums[mid+1]:
+                return nums[mid] 
 
             if mid % 2 == 0: # even
                 if nums[mid] == nums[mid+1]: # even odd
                     low = mid+1
                 elif nums[mid] == nums[mid-1]: # odd even
                     high = mid-1
-                else:
-                    return nums[mid]
+                
             else: # odd
 
                 if nums[mid] == nums[mid+1]: #  odd even
                     high = mid-1
                 elif nums[mid] == nums[mid-1]: # even odd
                     low = mid+1
-                else:
-                    return nums[mid]
+                
 
