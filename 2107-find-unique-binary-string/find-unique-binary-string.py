@@ -1,3 +1,9 @@
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
-        return "".join('1' if x[i]=='0' else '0' for i, x in enumerate(nums))
+        ans=""
+        for i , ch in enumerate(nums):
+            if ch[i] == "1":
+                ans+="0"
+            else:
+                ans+="1"
+        return ans
