@@ -6,20 +6,32 @@
 #         self.right = right
 #py3
 class Solution:
+
+    def find_high(self,root_1):
+        if not root_1:
+            return 0
+        
+        lh = self.find_high(root_1.left)
+        rh = self.find_high(root_1.right)
+
+        return 1+max(lh,rh)
+
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        def dfs(node):
-            if not node:
-                return 0
-            
-            left = dfs(node.left)
-            if left == -1: return -1
-            
-            right = dfs(node.right)
-            if right == -1: return -1
-            
-            if abs(left - right) > 1:
-                return -1
-            
-            return 1 + max(left, right)
-            
-        return dfs(root) != -1
+
+        if not root:
+            return True
+        
+        lh = self.find_high(root.left)
+        rh = self.find_high(root.right)
+
+        if abs(lh-rh) > 1 :
+            return False
+        
+        left = self.isBalanced(root.left)
+        right = self.isBalanced(root.right)
+
+        if not left or not right:
+            return False
+        
+        return True
+        
