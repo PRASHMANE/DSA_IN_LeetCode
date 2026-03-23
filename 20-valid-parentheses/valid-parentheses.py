@@ -6,14 +6,12 @@ class Solution:
             "}":"{",
             "]":"["
         }
+        stack = []
 
-        stack=[]
-        for i in s:
-            if i in mp:
-                if not stack or stack.pop()!= mp[i]:
+        for ch in s:
+            if ch in mp:
+                if not stack or stack.pop() != mp[ch]:
                     return False
             else:
-                stack.append(i)
-
+                stack.append(ch)
         return not stack
-        
