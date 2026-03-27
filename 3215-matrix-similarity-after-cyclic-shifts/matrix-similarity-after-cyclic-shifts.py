@@ -31,9 +31,7 @@ class Solution:
                 reverse(arr[i],k,m-1)
                 reverse(arr[i],0,m-1)
 
-        for i in range(n):
-            for j in range(m):
-                if arr[i][j] != mat[i][j]:
+            if arr[i] != mat[i]:
                     return False
         
         return True
