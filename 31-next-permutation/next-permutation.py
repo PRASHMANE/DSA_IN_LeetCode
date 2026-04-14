@@ -4,18 +4,20 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         n = len(nums)
-        ind = n-2
 
-        while (ind >= 0 and nums[ind]>=nums[ind+1]):
-            ind-=1
-        
-        if ind >= 0:
-            j = n-1
-            for i in range(j,-1,-1):
-                if nums[i] > nums[ind]:
-                    break
-            
-            nums[ind],nums[i] = nums[i],nums[ind]
-        
-        nums[ind+1:] = nums[ind+1:][::-1]
-        return nums
+        # Step 1: find breakpoint
+        i = n - 2
+        while i >= 0 and nums[i] >= nums[i + 1]:
+            i -= 1
+
+        if i >= 0:
+            # Step 2: find next greater
+            j = n - 1
+            while nums[j] <= nums[i]:
+                j -= 1
+
+            # Step 3: swap
+            nums[i], nums[j] = nums[j], nums[i]
+
+        # Step 4: reverse
+        nums[i + 1:] = reversed(nums[i + 1:])
