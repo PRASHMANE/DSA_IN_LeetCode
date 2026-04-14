@@ -3,20 +3,19 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        ind=-1
+        n = len(nums)
+        ind = n-2
 
-        n=len(nums)
-
-        for i in range(n-1):
-            if nums[i] < nums[i+1]:
-                ind=i
-            
+        while (ind >= 0 and nums[ind]>=nums[ind+1]):
+            ind-=1
         
-        if ind != -1:
-            for i in range(n-1,ind,-1):
-                if nums[ind] < nums[i]:
-                    nums[ind],nums[i]=nums[i],nums[ind]
+        if ind >= 0:
+            j = n-1
+            for i in range(j,-1,-1):
+                if nums[i] > nums[ind]:
                     break
-            nums[ind+1:]=nums[ind+1:][::-1]
-        else:
-            nums[:] = nums[::-1]
+            
+            nums[ind],nums[i] = nums[i],nums[ind]
+        
+        nums[ind+1:] = nums[ind+1:][::-1]
+        return nums
