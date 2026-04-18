@@ -1,20 +1,30 @@
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
-        ans = set()
+        nums.sort()
 
         n = len(nums)
 
+        ans = set()
+
         for i in range(n):
-            seen = set()
+            if(i>0 and nums[i] == nums[i-1]):
+                continue
+            left = i+1
+            right = n -1
 
-            for j in range(i+1,n):
-                three = -(nums[i]+nums[j])
+            while left < right:
+                sum = nums[i]+nums[left]+nums[right]
+                if sum == 0:
+                    temp = (nums[i],nums[left],nums[right])
+                    ans.add(temp)
 
-                if three in seen:
-                    temp = [nums[i],nums[j],three]
-                    temp.sort()
-                    ans.add(tuple(temp))
-                
-                seen.add(nums[j])
+                    left+=1
+                    right-=1
+                elif sum < 0:
+                    left+=1
+                else:
+                    right-=1
+
         return list(ans)
-        
+
+            
