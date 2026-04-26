@@ -1,19 +1,20 @@
 class Solution:
     def advantageCount(self, nums1: List[int], nums2: List[int]) -> List[int]:
         n = len(nums1)
-
         nums1.sort()
 
-        num_2 = sorted([(val,i) for i , val in enumerate(nums2)],reverse=True)
+        nums_2 = sorted([(val,i) for i , val in enumerate(nums2)],reverse=True)
+
+        res = [0]*n
 
         left = 0
         right = n-1
-        ans=[0]*n
-        for val , ind in num_2:
+
+        for val , ind in nums_2:
             if nums1[right] > val:
-                ans[ind] = nums1[right]
+                res[ind] = nums1[right]
                 right-=1
             else:
-                ans[ind] = nums1[left]
+                res[ind] = nums1[left]
                 left+=1
-        return ans
+        return res
