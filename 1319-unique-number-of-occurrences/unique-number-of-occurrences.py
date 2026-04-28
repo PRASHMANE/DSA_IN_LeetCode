@@ -3,10 +3,9 @@ class Solution:
         
         count=Counter(arr)
 
-        ans=set()
+        count2 = Counter([val for val in count.values()])
 
-        for val in count.values():
-            if val in ans:
+        for value in count2.values():
+            if value > 1:
                 return False
-            ans.add(val)
         return True
