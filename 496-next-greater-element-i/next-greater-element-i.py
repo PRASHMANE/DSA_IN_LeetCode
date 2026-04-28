@@ -2,15 +2,14 @@ class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         
         stack = []
-        nge = {}
+        hsh={}
 
-        for num in nums2:
-            while stack and num > stack[-1]:
-                nge[stack.pop()] = num
-            stack.append(num)
-
-        # remaining elements have no next greater
+        for i in nums2:
+            while stack and  i > stack[-1]:
+                hsh[stack.pop()] = i
+            stack.append(i)
+        
         while stack:
-            nge[stack.pop()] = -1
-
-        return [nge[num] for num in nums1]
+            hsh[stack.pop()] = -1
+        
+        return [hsh[i] for i in nums1]
