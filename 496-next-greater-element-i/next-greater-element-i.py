@@ -1,21 +1,16 @@
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         
-        hsh2={}
+        stack = []
+        nge = {}
 
-        for i in range(len(nums2)):
-            found=False
-            for j in range(i,len(nums2)):
-                if nums2[i] < nums2[j]:
-                    found=True
-                    hsh2[nums2[i]] = nums2[j]
-                    break
-            if not found:
-                hsh2[nums2[i]] = -1
+        for num in nums2:
+            while stack and num > stack[-1]:
+                nge[stack.pop()] = num
+            stack.append(num)
 
-        ans=[]
+        # remaining elements have no next greater
+        while stack:
+            nge[stack.pop()] = -1
 
-        for i in nums1:
-            ans.append(hsh2[i])
-        
-        return ans
+        return [nge[num] for num in nums1]
