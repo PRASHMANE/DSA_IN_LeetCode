@@ -1,6 +1,11 @@
 class Solution:
     def percentageLetter(self, s: str, letter: str) -> int:
-        count = Counter(s)
+        count = 0
+
         n = len(s)
-        return int((count[letter] / n) * 100)
+
+        for i in s:
+            if i == letter:
+                count+=1
+        return int((count / n) * 100)
     
