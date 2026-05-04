@@ -7,24 +7,24 @@
 #py3
 class Solution:
 
-    def find_high(self,root_1):
-        if not root_1:
+    def maxDepth(self,node):
+        if not node:
             return 0
-        
-        lh = self.find_high(root_1.left)
-        rh = self.find_high(root_1.right)
 
-        return 1+max(lh,rh)
+        lh = self.maxDepth(node.left)
+        rh = self.maxDepth(node.right)
+
+        return 1 + max(lh,rh)
 
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
 
         if not root:
             return True
         
-        lh = self.find_high(root.left)
-        rh = self.find_high(root.right)
+        lh = self.maxDepth(root.left)
+        rh = self.maxDepth(root.right)
 
-        if abs(lh-rh) > 1 :
+        if abs(lh-rh) > 1:
             return False
         
         left = self.isBalanced(root.left)
@@ -34,4 +34,5 @@ class Solution:
             return False
         
         return True
-        
+
+       
