@@ -1,14 +1,26 @@
-class Solution(object):
-    def preorder(self, root):
-        # To store the output result...
-        output = []
-        self.traverse(root, output)
-        return output
-    def traverse(self, root, output):
-        # Base case: If root is none...
-        if root is None: return
-        # Append the value of the root node to the output...
-        output.append(root.val)
-        # Recursively traverse each node in the children array...
-        for child in root.children:
-            self.traverse(child, output)
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: Optional[int] = None, children: Optional[List['Node']] = None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        
+        res = []
+
+        def pre(node):
+            if not node:
+                return
+            
+            res.append(node.val)
+
+            for child in node.children:
+                pre(child)
+
+        pre(root)
+        return res
+
+
