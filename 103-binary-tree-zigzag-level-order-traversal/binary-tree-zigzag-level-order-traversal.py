@@ -8,30 +8,33 @@ class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return []
-        res = []
-        q = deque([root])
-        left_to_right=True
 
-        while q:
+        left_to_right = True
+
+        que = deque([root])
+        res = []
+
+        while que:
             level = []
-            for _ in range(len(q)):
-                node = q.popleft()
+            size = len(que)
+
+            for _ in range(size):
+                node = que.popleft()
+
                 level.append(node.val)
 
                 if node.left:
-                    q.append(node.left)
+                    que.append(node.left)
                 
                 if node.right:
-                    q.append(node.right)
+                    que.append(node.right)
+                
 
-            
             if not left_to_right:
-                level.reverse()
-
-            
-            left_to_right = not left_to_right
-            res.append(level)
+               res.append(level[::-1])
+               left_to_right = True
+            else:
+                res.append(level)
+                left_to_right = False
         
         return res
-
-        
