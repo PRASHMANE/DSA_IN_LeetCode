@@ -9,23 +9,26 @@ class Solution:
 
         
 
-        nodes = []
+        node1 = []
 
-        def dfs(node, row, col):
+        def dfs(node,col,row):
             if not node:
                 return
             
-            nodes.append((col, row, node.val))
-            
-            dfs(node.left, row + 1, col - 1)
-            dfs(node.right, row + 1, col + 1)
+            node1.append((col,row,node.val))
 
-        dfs(root, 0, 0)
+            dfs(node.left,col-1,row+1)
+            dfs(node.right,col+1,row+1)
+        
+        dfs(root,0,0)
 
-        nodes.sort()
+        node1.sort()
 
         res = defaultdict(list)
-        for col, row, val in nodes:
-            res[col].append(val)
 
+        for col,row,val in node1:
+            res[col].append(val)
+        
         return [res[x] for x in sorted(res)]
+
+
