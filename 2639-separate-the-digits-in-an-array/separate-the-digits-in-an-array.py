@@ -10,8 +10,7 @@ class Solution:
         ans = []
 
         for i in hsh:
-            for j in hsh[i]:
-                ans.append(j)
+            ans.extend(hsh[i])
         
         return ans
         
