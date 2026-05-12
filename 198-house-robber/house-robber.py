@@ -4,18 +4,21 @@ class Solution:
         dp=[-1]*n
 
         def solve(i):
-            if i>=n:
+            if i < 0:
                 return 0
+
+            if i==0:
+                return nums[i]
 
             if dp[i] != -1:
                 return dp[i]
             
-            take = nums[i]+solve(i+2)
-            nottake = solve(i+1)
+            take = nums[i]+solve(i-2)
+            nottake = solve(i-1)
 
             dp[i]= max(take,nottake)
             return dp[i]
 
-        return solve(0)
+        return solve(n-1)
 
 
