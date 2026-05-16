@@ -3,28 +3,20 @@ class Solution:
 
         n = len(cost)
 
-        if n <= 2:
-            return min(cost)
+        dp = [-1] * n
 
-        dp=[-1]*n
-
-        def fun(ind):
-
-            if ind == 0:
-                return cost[ind]
-            if ind < 0:
+        def cost1(ind):
+            if ind >= n:
                 return 0
-            
+
             if dp[ind] != -1:
                 return dp[ind]
-            
-            case1 = fun(ind-1)
-            case2 = fun(ind-2)
 
-            dp[ind] = min(case1,case2)+cost[ind]
+            fl = cost1(ind+1)+cost[ind]
+            fr = cost1(ind+2)+cost[ind]
+
+            dp[ind] = min(fl,fr)
 
             return dp[ind]
         
-        fun(n-1)
-        return min(dp[-1],dp[-2])
-    
+        return min(cost1(0),cost1(1))
