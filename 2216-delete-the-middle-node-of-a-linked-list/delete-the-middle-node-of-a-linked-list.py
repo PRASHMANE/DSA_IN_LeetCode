@@ -8,17 +8,20 @@ class Solution:
         
         if not head or not head.next:
             return None
-
-        slow = head
+        
         fast = head
+        slow = head
         prev = None
 
         while fast and fast.next:
+            
+            
             prev = slow
             slow = slow.next
             fast = fast.next.next
 
-        # delete middle
         prev.next = slow.next
 
         return head
+        
+        
