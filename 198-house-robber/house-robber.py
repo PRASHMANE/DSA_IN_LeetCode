@@ -1,24 +1,14 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
-        dp=[-1]*n
+        if n == 1:
+            return nums[0]
+        dp = [-1]*n
 
-        def solve(i):
-            if i < 0:
-                return 0
+        dp[0] = nums[0]
+        dp[1] = max(nums[0],nums[1])
 
-            if i==0:
-                return nums[i]
-
-            if dp[i] != -1:
-                return dp[i]
-            
-            take = nums[i]+solve(i-2)
-            nottake = solve(i-1)
-
-            dp[i]= max(take,nottake)
-            return dp[i]
-
-        return solve(n-1)
-
+        for right in range(2,n):
+            dp[right]=max(dp[right-1],dp[right-2]+nums[right])
+        return dp[-1]
 
