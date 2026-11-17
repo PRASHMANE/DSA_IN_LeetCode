@@ -1,20 +1,18 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-
         n = len(isConnected)
-        visited = [False] * n
-        count = 0
-        
-        def dfs(city: int):
-            visited[city] = True
-            for j in range(n):
-                if isConnected[city][j] == 1 and not visited[j]:
-                    dfs(j)
-                    
+        vis = [False]*n
+        count=0
+        def dfs(node):
+            vis[node] = True
+
+            for neig in range(n):
+                if isConnected[node][neig] == 1 and not vis[neig]:
+                    dfs(neig)
+            
+
         for i in range(n):
-            if not visited[i]:
+            if vis[i] == 0:
+                count+=1
                 dfs(i)
-                count += 1
-                
         return count
-        
