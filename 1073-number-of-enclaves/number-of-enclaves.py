@@ -1,41 +1,37 @@
 class Solution:
-    def numEnclaves(self, grid: List[List[int]]) -> int:
-        n=len(grid)
-        m=len(grid[0])
-        visited=[[0]*m for i in range(n)]
+    def numEnclaves(self, grid: list[list[int]]) -> int:
+        m,n = len(grid),len(grid[0])
+        if not grid:
+            return 
 
+        def dfs(r,c):
+            if r < 0 or r >= m or c < 0 or c >= n or grid[r][c] == 0:
+                return
+            grid[r][c] = 0
+            dfs(r+1,c)
+            dfs(r-1,c)
+            dfs(r,c+1)
+            dfs(r,c-1)
 
-        def dfs(visited,grid,row,col,n,m):
-            stack=[]
-            stack.append([row,col])
-            while stack:
-                p=stack.pop()
-                r=p[0]
-                c=p[1]
-                for i in range(r-1,r+2):
-                    for j in range(c-1,c+2):
-                        if 0<=i<n and 0<=j<m:
-                            if abs(i-r) != abs(j-c) and grid[i][j]==1 and visited[i][j]==0:
-                                visited[i][j]=1
-                                stack.append([i,j])
-    
+        for i in range(m):
+            if grid[i][0] == 1:
+                dfs(i,0)
+            if grid[i][n-1] == 1:
+                dfs(i,n-1)
 
-        # find the edge element
-        for i in range(n):
-            for j in range(m):
-                if i==0 or i==n-1:
-                    if grid[i][j]==1 and visited[i][j]!=1:
-                        visited[i][j]=1
-                        dfs(visited,grid,i,j,n,m)
-                else:
-                    if j==0 or j==m-1:
-                        if grid[i][j]==1 and visited[i][j]!=1:
-                            visited[i][j]=1
-                            dfs(visited,grid,i,j,n,m)
-        count=0
-        for i in range(n):
-            for j in range(m):
-                if grid[i][j]==1 and visited[i][j]!=1:
+        for j in range(n):
+            if grid[0][j] == 1:
+                dfs(0,j)
+            if grid[m-1][j] == 1:
+                dfs(m-1,j)
+
+        count = 0
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
                     count+=1
         return count
+        
+
         
